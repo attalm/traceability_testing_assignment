@@ -44,7 +44,7 @@ class JsonHandler:
             bool: True if key exists, False otherwise.
  """
         return key in data
-    
+
     def update_json(self, key, value, file_path):
         """
         Update JSON data in a file.
