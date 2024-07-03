@@ -1,59 +1,58 @@
-import json
-
+import json 
 
 class JsonHandler:
     """
-    A class to handle JSON file operations.
+    A class to handle JSON read, write, update, and key checking operations.
     """
 
-    def read_json(self, file_path: str) -> dict:
+    def read_json(self, file_path):
         """
-        Reads JSON data from a file.
+        Read JSON data from a file.
 
         Args:
             file_path (str): Path to the JSON file.
 
         Returns:
-            dict: JSON data as a Python dictionary.
+            dict: JSON data as a dictionary.
         """
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
         return data
 
-    def write_json(self, data: dict, file_path: str) -> None:
+    def write_json(self, data, file_path):
         """
-        Writes JSON data to a file.
+        Write JSON data to a file.
 
         Args:
-            data (dict): Data to write (Python dictionary).
+            data (dict): Data to be written (dictionary).
             file_path (str): Path to the JSON file.
         """
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w') as f:
             json.dump(data, f)
 
-    def check_key(self, data: dict, key: str) -> bool:
+    def check_key(self, data, key):
         """
-        Checks if a key exists in a dictionary.
+        Check if a key exists in JSON data.
 
         Args:
-            data (dict): Dictionary to check.
-            key (str): Key to check for.
+            data (dict): JSON data to check.
+            key (str): Key to check in the JSON data.
 
         Returns:
             bool: True if key exists, False otherwise.
         """
         return key in data
-
-    def update_json(self, key: str, value: any, file_path: str) -> None:
+    
+    def update_json(self, key, value, file_path):
         """
-        Updates a JSON file with a new key-value pair.
+        Update JSON data in a file.
 
         Args:
-            key (str): Key to update.
-            value (any): New value to assign to the key.
-            file_path (str): Path to the JSON fixture.
+            key (str): Key to update in the JSON data.
+            value (str): New value for the key.
+            file_path (str): Path to the JSON file.
         """
-        with open(file_path, 'r+', encoding='utf-8') as f:
+        with open(file_path, 'r+') as f:
             data = json.load(f)
             data[key] = value
             f.seek(0)
