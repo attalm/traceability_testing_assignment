@@ -66,5 +66,3 @@ def test_update_json(another_json_handler, another_updated_file):
     another_json_handler.update_json("test", "new data", another_updated_file)
     updated_data = another_json_handler.read_json(another_updated_file)
     assert updated_data["test"] == "new data"
-
-
