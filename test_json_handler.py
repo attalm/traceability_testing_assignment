@@ -6,7 +6,7 @@ from json_handler import JsonHandler
 
 
 @pytest.fixture
-def json_handler() -> JsonHandler:
+def json_handler_instance():
     """Provides an instance of JsonHandler for tests."""
     return JsonHandler()
 
