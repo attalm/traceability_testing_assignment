@@ -15,14 +15,6 @@ def json_handler():
     return JsonHandler()
 
 
-
-@pytest.fixture
-def another_file(tmp_path):
-    """
-    Provides another temporary JSON file path for tests.
-    """
-    return tmp_path / "another_file.json"
-
 def requirement(requirement_id):
     """
     Decorator function to mark a test function with a requirement ID.
