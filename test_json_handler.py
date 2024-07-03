@@ -14,12 +14,7 @@ def json_handler():
     """
     return JsonHandler()
 
-@pytest.fixture
-def updated_file(tmp_path):
-    """
-    Provides a temporary JSON file path for tests.
-    """
-    return tmp_path / "test.json"
+
 
 @pytest.fixture
 def another_file(tmp_path):
