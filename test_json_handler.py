@@ -17,12 +17,11 @@ def temp_file(tmp_path):
     return tmp_path / "test.json"
 
 
-
-
 @pytest.fixture
-def another_file(tmp_path) -> str:
+def another_file(tmp_path):
     """Provides another temporary JSON file path for tests."""
     return tmp_path / "another_file.json"
+
 
 def requirement(requirement_id):
     """
@@ -44,6 +43,7 @@ def test_read_json(json_handler_instance, temp_file):
     read_data = json_handler_instance.read_json(temp_file)
     assert read_data == data
 
+
 @requirement("REQ-102")
 def test_write_json(json_handler_instance, temp_file):
     """
@@ -54,6 +54,7 @@ def test_write_json(json_handler_instance, temp_file):
     read_data = json_handler_instance.read_json(temp_file)
     assert read_data == data
 
+
 @requirement("REQ-103")
 def test_check_key(json_handler_instance):
     """
@@ -61,6 +62,7 @@ def test_check_key(json_handler_instance):
     """
     data = {"test": "data"}
     assert json_handler_instance.check_key(data, 'test')
+
 
 @requirement("REQ-104")
 def test_update_json(json_handler_instance, temp_file):
