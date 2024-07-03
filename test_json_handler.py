@@ -1,25 +1,31 @@
+# test_json_handler.py
+
 """
 Tests for JsonHandler class in json_handler.py.
 """
+
 import pytest
 from json_handler import JsonHandler
 
-
 @pytest.fixture
 def json_handler_instance():
-    """Provides an instance of JsonHandler for tests."""
+    """
+    Provides an instance of JsonHandler for tests.
+    """
     return JsonHandler()
 
-
 @pytest.fixture
-def updated_file(tmp_path) -> str:
-    """Provides a temporary JSON file path for tests."""
+def updated_file(tmp_path):
+    """
+    Provides a temporary JSON file path for tests.
+    """
     return tmp_path / "test.json"
 
-
 @pytest.fixture
-def another_file(tmp_path) -> str:
-    """Provides another temporary JSON file path for tests."""
+def another_file(tmp_path):
+    """
+    Provides another temporary JSON file path for tests.
+    """
     return tmp_path / "another_file.json"
 
 def requirement(requirement_id):
@@ -31,42 +37,41 @@ def requirement(requirement_id):
         return function
     return decorator
 
-
 @requirement("REQ-101")
-def test_read_json(json_handler, temp_file):
+def test_read_json(json_handler_instance, updated_file):
     """
     Test reading JSON data from a file.
     """
     data = {"test": "data"}
-    json_handler.write_json(data, temp_file)
-    read_data = json_handler.read_json(temp_file)
+    json_handler_instance.write_json(data, updated_file)
+    read_data = json_handler_instance.read_json(updated_file)
     assert read_data == data
 
 @requirement("REQ-102")
-def test_write_json(json_handler, temp_file):
+def test_write_json(json_handler_instance, updated_file):
     """
     Test writing and reading JSON data to/from a file.
     """
     data = {"test": "data"}
-    json_handler.write_json(data, temp_file)
-    read_data = json_handler.read_json(temp_file)
+    json_handler_instance.write_json(data, updated_file)
+    read_data = json_handler_instance.read_json(updated_file)
     assert read_data == data
 
 @requirement("REQ-103")
-def test_check_key(json_handler):
+def test_check_key(json_handler_instance):
     """
     Test checking the existence of a key in JSON data.
     """
     data = {"test": "data"}
-    assert json_handler.check_key(data, 'test')
+    assert json_handler_instance.check_key(data, 'test')
 
 @requirement("REQ-104")
-def test_update_json(another_json_handler, another_updated_file):
+def test_update_json(json_handler_instance, another_file):
     """
     Test updating JSON data in a file.
     """
     data = {"test": "data"}
-    another_json_handler.write_json(data, another_updated_file)
-    another_json_handler.update_json("test", "new data", another_updated_file)
-    updated_data = another_json_handler.read_json(another_updated_file)
+    json_handler_instance.write_json(data, another_file)
+    json_handler_instance.update_json("test", "new data", another_file)
+    updated_data = json_handler_instance.read_json(another_file)
     assert updated_data["test"] == "new data"
