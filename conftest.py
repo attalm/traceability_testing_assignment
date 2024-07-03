@@ -1,36 +1,37 @@
-"""
-Custom pytest fixtures and hooks for testing utilities.
-"""
+import pytest
+from json_handler import JsonHandler
 
-def pytest_runtest_protocol(item):
+
+@pytest.fixture
+def json_handler_instance():
     """
-    Customizes test execution reporting.
-
-    Args:
-        item (pytest.Function): Test item object.
-        nextitem (None): Always None in this context.
-
-    Returns:
-        None: Allows the default test protocol to continue.
+    Fixture to provide an instance of JsonHandler.
     """
+    return JsonHandler()
 
+
+@pytest.fixture
+def updated_file(tmp_path):
+    """
+    Fixture to provide a temporary file path.
+    """
+    return tmp_path / "test.json"
+
+
+@pytest.fixture
+def another_file(tmp_path):
+    """
+    Fixture to provide another temporary file path.
+    """
+    return tmp_path / "another_file.json"
+
+
+def pytest_runtest_protocol(item, nextitem):
     if hasattr(item, 'function') and hasattr(item.function, 'requirement'):
         print(f"Running test {item.nodeid} with requirement {item.function.requirement}")
-    return None  # Continue with the default test protocol
-
+    return None  # continue with the default test protocol
 
 def pytest_runtest_makereport(item, call):
-    """
-    Captures test outcome and stores it in the traceability matrix.
-
-    Args:
-        item (pytest.Function): Test item object.
-        call (pytest.Call): Information about the test execution.
-
-    Returns:
-        pytest.Report: Modified test report object.
-    """
-
     if call.when == 'call':
         result = 'NOT RUN'
         if call.excinfo is not None:
@@ -42,30 +43,13 @@ def pytest_runtest_makereport(item, call):
                 result = 'FAIL'
         else:
             result = 'PASS'
-    else:
-        result = 'SKIPPED'  # Handle other call types (e.g., setup/teardown)
-
-    item.config.traceability_matrix[item.nodeid] = (item.function.requirement, result)
-
-
+        item.config.traceability_matrix[item.nodeid] = (item.function.requirement, result)
 
 def pytest_sessionstart(session):
-    """
-    Initializes the traceability matrix at the beginning of a test session.
-
-    Args:
-        session (pytest.Session): The pytest session object.
-    """
     session.config.traceability_matrix = {}
 
-
-def pytest_sessionfinish(session):
-    """
-    Prints the traceability matrix at the end of a test session.
-
-    Args:
-        session (pytest.Session): The pytest session object.
-    """
+def pytest_sessionfinish(session, exitstatus):
     print("Traceability Matrix:")
     for test, (requirement, result) in session.config.traceability_matrix.items():
         print(f"{test}: {requirement}, {result}")
+
