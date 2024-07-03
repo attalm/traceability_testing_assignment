@@ -1,3 +1,7 @@
+"""
+Tests for the JsonHandler class functionality.
+"""
+
 import pytest
 from json_handler import JsonHandler
 
@@ -58,4 +62,16 @@ def test_update_json(json_handler: JsonHandler, different_file: str) -> None:
     data = {"test": "data"}
     json_handler.write_json(data, different_file)
     json_handler.update_json("test", "new data", different_file)
-    updated_data = json_handler
+    updated_data = json_handler.read_json(different_file)  # Use the updated data
+    assert updated_data["test"] == "new data"
+
+
+@requirement("REQ-105")
+def test_delete_json(json_handler: JsonHandler, another_file: str) -> None:
+    """Tests deleting a JSON file."""
+    data = {"test": "data"}
+    json_handler.write_json(data, another_file)
+    json_handler.delete_json(another_file)  # Assuming a delete_json method exists
+    with pytest.raises(FileNotFoundError):
+        json_handler.read_json(another_file)
+

@@ -1,5 +1,6 @@
-import pytest
-
+"""
+Custom pytest fixtures and hooks for testing utilities.
+"""
 
 def pytest_runtest_protocol(item, nextitem):
     """
@@ -45,7 +46,7 @@ def pytest_runtest_makereport(item, call):
         result = 'SKIPPED'  # Handle other call types (e.g., setup/teardown)
 
     item.config.traceability_matrix[item.nodeid] = (item.function.requirement, result)
-    return call.report  # Return the modified report (optional)
+    return call.report  # Optional: Return the modified report
 
 
 def pytest_sessionstart(session):
@@ -68,3 +69,4 @@ def pytest_sessionfinish(session):
     print("Traceability Matrix:")
     for test, (requirement, result) in session.config.traceability_matrix.items():
         print(f"{test}: {requirement}, {result}")
+
