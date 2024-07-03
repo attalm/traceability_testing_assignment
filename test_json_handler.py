@@ -8,7 +8,7 @@ import pytest
 from json_handler import JsonHandler
 
 @pytest.fixture
-def json_handler():
+def json_handler_instance():
     """
     Provides an instance of JsonHandler for tests.
     """
