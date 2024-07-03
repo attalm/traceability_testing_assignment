@@ -1,0 +1,19 @@
+name: Python Code Quality & Unit Tests
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies (poetry)
+        uses: python-poetry/actions/setup-poetry@v1
+      - name: Install test requirements (pip)
+        run: pip install pytest
+      - name: Run Pylint
+        run: poetry run pylint json_handler.py test_json_handler.py conftest.py
+      - name: Run tests
+        run: pytest
