@@ -4,7 +4,6 @@
 Tests for JsonHandler class in json_handler.py.
 """
 
-import pytest
 
 
 
