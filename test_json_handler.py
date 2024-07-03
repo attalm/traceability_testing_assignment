@@ -2,9 +2,6 @@
 Tests for JsonHandler class in json_handler.py.
 """
 
-import pytest
-from json_handler import JsonHandler  # assuming the class is in json_handler.py
-
 def requirement(requirement_id):
     """
     Decorator function to mark a test function with a requirement ID.
