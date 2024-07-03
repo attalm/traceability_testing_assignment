@@ -5,14 +5,7 @@ Tests for JsonHandler class in json_handler.py.
 """
 
 import pytest
-from json_handler import JsonHandler
 
-@pytest.fixture
-def json_handler_instance():
-    """
-    Provides an instance of JsonHandler for tests.
-    """
-    return JsonHandler()
 
 
 def requirement(requirement_id):
