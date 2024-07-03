@@ -1,6 +1,26 @@
 """
 Tests for JsonHandler class in json_handler.py.
 """
+import pytest
+from json_handler import JsonHandler
+
+
+@pytest.fixture
+def json_handler() -> JsonHandler:
+    """Provides an instance of JsonHandler for tests."""
+    return JsonHandler()
+
+
+@pytest.fixture
+def updated_file(tmp_path) -> str:
+    """Provides a temporary JSON file path for tests."""
+    return tmp_path / "test.json"
+
+
+@pytest.fixture
+def another_file(tmp_path) -> str:
+    """Provides another temporary JSON file path for tests."""
+    return tmp_path / "another_file.json"
 
 def requirement(requirement_id):
     """
