@@ -69,4 +69,3 @@ def pytest_sessionfinish(session):
     print("Traceability Matrix:")
     for test, (requirement, result) in session.config.traceability_matrix.items():
         print(f"{test}: {requirement}, {result}")
-

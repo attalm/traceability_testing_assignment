@@ -4,6 +4,9 @@ A class to handle JSON read, write, update, and key checking operations.
 
 import json
 
+"""
+A class to handle JSON read, write, update, and key checking operations.
+"""
 class JsonHandler:
 
     def read_json(self, file_path):
