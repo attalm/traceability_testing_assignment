@@ -46,7 +46,7 @@ def pytest_runtest_makereport(item, call):
         result = 'SKIPPED'  # Handle other call types (e.g., setup/teardown)
 
     item.config.traceability_matrix[item.nodeid] = (item.function.requirement, result)
-    return call.report  # Optional: Return the modified report
+
 
 
 def pytest_sessionstart(session):
