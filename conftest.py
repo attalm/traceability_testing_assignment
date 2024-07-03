@@ -52,7 +52,6 @@ def pytest_runtest_makereport(item, call):
 def pytest_sessionstart(session):
     """
     Initializes the traceability matrix at the beginning of a test session.
-
     Args:
         session (pytest.Session): The pytest session object.
     """
