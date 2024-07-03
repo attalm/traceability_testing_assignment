@@ -52,7 +52,7 @@ def test_write_json(json_handler, temp_file):
     read_data = json_handler.read_json(temp_file)
     assert read_data == data
 
-@JsonHandler("REQ-103")
+@requirement("REQ-103")
 def test_check_key(json_handler):
     """
     Test checking the existence of a key in JSON data.
