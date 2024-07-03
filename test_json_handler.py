@@ -32,7 +32,7 @@ def requirement(requirement_id):
     return decorator
 
 
-@JsonHandler("REQ-101")
+@requirement("REQ-101")
 def test_read_json(json_handler, temp_file):
     """
     Test reading JSON data from a file.
