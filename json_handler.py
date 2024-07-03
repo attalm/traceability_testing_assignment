@@ -59,3 +59,4 @@ class JsonHandler:
             f.seek(0)
             json.dump(data, f)
             f.truncate()
+

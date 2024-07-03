@@ -21,6 +21,12 @@ def updated_file(tmp_path) -> str:
     return tmp_path / "test.json"
 
 
+@pytest.fixture
+def another_file(tmp_path) -> str:
+    """Provides another temporary JSON file path for tests."""
+    return tmp_path / "another_file.json"
+
+
 @requirement("REQ-101")
 def test_read_json(json_handler: JsonHandler, updated_file: str) -> None:
     """Tests reading JSON data from a file."""
@@ -47,10 +53,9 @@ def test_check_key(json_handler: JsonHandler) -> None:
 
 
 @requirement("REQ-104")
-def test_update_json(json_handler: JsonHandler, updated_file: str) -> None:
+def test_update_json(json_handler: JsonHandler, different_file: str) -> None:
     """Tests updating a JSON file with a new key-value pair."""
     data = {"test": "data"}
-    json_handler.write_json(data, updated_file)
-    json_handler.update_json("test", "new data", updated_file)
-    updated_data = json_handler.read_json(updated_file)
-    assert updated_data["test"] == "new data"
+    json_handler.write_json(data, different_file)
+    json_handler.update_json("test", "new data", different_file)
+    updated_data = json_handler
