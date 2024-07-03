@@ -14,19 +14,6 @@ def requirement(requirement_id):
         return function
     return decorator
 
-@pytest.fixture
-def json_handler():
-    """
-    Fixture to provide an instance of JsonHandler.
-    """
-    return JsonHandler()
-
-@pytest.fixture
-def temp_file(tmp_path):
-    """
-    Fixture to provide a temporary file path.
-    """
-    return tmp_path / "test.json"
 
 @requirement("REQ-101")
 def test_read_json(json_handler, temp_file):

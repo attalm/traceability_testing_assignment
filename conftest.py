@@ -2,7 +2,7 @@
 Custom pytest fixtures and hooks for testing utilities.
 """
 
-def pytest_runtest_protocol(item, nextitem):
+def pytest_runtest_protocol(item):
     """
     Customizes test execution reporting.
 
