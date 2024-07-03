@@ -60,7 +60,7 @@ def test_check_key(json_handler):
     data = {"test": "data"}
     assert json_handler.check_key(data, 'test')
 
-@JsonHandler("REQ-104")
+@requirement("REQ-104")
 def test_update_json(another_json_handler, another_updated_file):
     """
     Test updating JSON data in a file.
